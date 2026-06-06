@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kenng.calorate",
+      "sha256_cert_fingerprints": [
+        "4D:B3:27:83:48:AB:58:61:A3:68:EB:DC:7D:D2:E4:19:60:84:CE:5C:80:BD:78:9B:85:F8:F0:29:6A:AF:37:83",
+        "2E:A3:CE:F1:96:CB:CF:95:A8:A9:49:22:BC:A2:D4:03:9C:80:F2:DE:22:E2:E7:48:71:76:25:C3:63:99:A3:E5"
+      ]
+    }
+  }
+]
