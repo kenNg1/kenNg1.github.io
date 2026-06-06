@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["TW4U7K3LWF.com.kenng.calorate"],
+        "components": [
+          {
+            "/": "/log",
+            "comment": "calorietracker universal link — matches https://kenNg1.github.io/log?..."
+          }
+        ]
+      }
+    ]
+  }
+}

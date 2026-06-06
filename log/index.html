@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log Meal — Calorate</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f2f2f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px 24px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+    .icon { font-size: 48px; margin-bottom: 16px; }
+    h1 { font-size: 22px; font-weight: 700; color: #1c1c1e; margin-bottom: 8px; }
+    .subtitle { font-size: 15px; color: #8e8e93; margin-bottom: 24px; line-height: 1.4; }
+    .meal-card {
+      background: #f2f2f7;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    .meal-name { font-size: 17px; font-weight: 600; color: #1c1c1e; margin-bottom: 12px; }
+    .macros { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .macro { text-align: center; }
+    .macro-value { font-size: 20px; font-weight: 700; color: #1c1c1e; }
+    .macro-label { font-size: 11px; color: #8e8e93; text-transform: uppercase; letter-spacing: 0.5px; }
+    .calories-row { grid-column: 1 / -1; border-bottom: 1px solid #e5e5ea; padding-bottom: 12px; margin-bottom: 4px; }
+    .calories-row .macro-value { font-size: 32px; color: #ff9f0a; }
+    .open-btn {
+      display: block;
+      background: #ff9f0a;
+      color: white;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .hint { font-size: 13px; color: #aeaeb2; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">🥗</div>
+  <h1 id="meal-title">Log this meal</h1>
+  <p class="subtitle">Open Calorate on your iPhone to log it instantly.</p>
+
+  <div class="meal-card" id="meal-card" style="display:none">
+    <div class="meal-name" id="meal-name"></div>
+    <div class="macros">
+      <div class="macro calories-row">
+        <div class="macro-value" id="calories">—</div>
+        <div class="macro-label">kcal</div>
+      </div>
+      <div class="macro">
+        <div class="macro-value" id="protein">—</div>
+        <div class="macro-label">Protein (g)</div>
+      </div>
+      <div class="macro">
+        <div class="macro-value" id="carbs">—</div>
+        <div class="macro-label">Carbs (g)</div>
+      </div>
+      <div class="macro">
+        <div class="macro-value" id="fat">—</div>
+        <div class="macro-label">Fat (g)</div>
+      </div>
+    </div>
+  </div>
+
+  <a id="deep-link-btn" class="open-btn" href="#">Open in Calorate</a>
+  <p class="hint">Requires the Calorate app installed on iOS.</p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get('name');
+  const calories = params.get('calories');
+  const protein = params.get('protein');
+  const carbs = params.get('carbs');
+  const fat = params.get('fat');
+  const fibre = params.get('fibre') || '0';
+
+  if (name) {
+    document.getElementById('meal-title').textContent = 'Log: ' + decodeURIComponent(name);
+    document.getElementById('meal-name').textContent = decodeURIComponent(name);
+    document.getElementById('meal-card').style.display = 'block';
+    if (calories) document.getElementById('calories').textContent = calories;
+    if (protein) document.getElementById('protein').textContent = protein;
+    if (carbs) document.getElementById('carbs').textContent = carbs;
+    if (fat) document.getElementById('fat').textContent = fat;
+  }
+
+  // Build custom-scheme fallback URL so the button also works
+  const customUrl = 'calorietracker://log?' + window.location.search.slice(1);
+  document.getElementById('deep-link-btn').href = customUrl;
+</script>
+</body>
+</html>
